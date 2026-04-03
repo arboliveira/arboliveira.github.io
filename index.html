@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- -->
+
+<head>
+
+<style>
+	div#page {
+		min-height: min(66vh, 66vw);
+	}
+	.small-img {
+		height: 40px;
+	}
+	.tower {
+		display: flex; flex-direction: column; justify-content: space-between;
+	}
+</style>
+
+</head>
+
+<!-- -->
+
+<body>
+
+<template data-customary-name="doorway-to-infinite" data-customary-attributes="href">
+	<div>
+		<a target="_blank" href="{{href}}">
+		<p class="doorway">{{title}}</p>
+			<slot></slot>
+		</a>
+	</div>
+	<style>
+		div {
+			text-align: center;
+		}
+		div:hover {
+			cursor: pointer;
+		}
+		a {
+			color: black;
+			text-decoration: none;
+		}
+		.doorway {
+			font-family: monospace, Courier New;
+			font-weight: bold;
+			font-size: 0.8em;
+		}
+	</style>
+</template>
+
+<template data-customary-name="the-arbo-group-logo">
+	<table id="logo-circle" class="wheel-of-fortune">
+		<tr>
+			<td colspan=7>
+				<table border="0" width="100%"><tr>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="T">T</span></td>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="H">H</span></td>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="E">E</span></td>
+				</tr></table>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan=3 class="the-arbo-group-border">
+				<span class="the-arbo-group-logo" style="font-size: 64pt;" id="a">a</span>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td valign=top rowspan=3 class="the-arbo-group-border">
+				<span class="the-arbo-group-logo" style="font-size: 64pt;" id="r">r</span>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td valign=top rowspan=3 class="the-arbo-group-border">
+				<span class="the-arbo-group-logo" style="font-size: 64pt;" id="b">b</span>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="the-arbo-group-border">
+				<span class="the-arbo-group-logo" style="font-size: 64pt;" id="o">o</span>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan=7>
+				<table border="0" width="100%"><tr>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="G">G</span></td>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="R">R</span></td>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="O">O</span></td>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="U">U</span></td>
+					<td class="the-arbo-group-text"><span style="font-size: 16pt;" id="P">P</span></td>
+				</tr></table>
+			</td>
+		</tr>
+	</table>
+	<customary:classMap
+			target=".wheel-of-fortune" classInfo="{{wheel_classes}}"
+	></customary:classMap>
+
+	<style>
+		#logo-circle {
+			--side: min(66vh, 66vw);
+			min-height: var(--side);
+			min-width: var(--side);
+
+			/* circle around the text */
+			border-radius: 50%; border-width: 2px; border-style: dotted; border-color: silver;
+
+			/* keep text inside circle */
+			padding-left: 80pt; padding-right: 80pt; padding-top: 50pt; padding-bottom: 50pt;
+		}
+		#logo-circle:hover {
+			background-color: mintcream;
+			cursor: pointer;
+		}
+		.the-arbo-group-text {
+			font-family: "Courier New", monospace;
+			font-weight: bold;
+			text-align: center;
+		}
+		.the-arbo-group-logo {
+			font-family: "Times New Roman", serif;
+			text-decoration: underline;
+		}
+		.the-arbo-group-border {
+			border: 1px solid silver;
+			padding: 4px;
+			text-align: center;
+		}
+		.wheel-of-fortune {
+			animation-name: wheel-of-fortune;
+			animation-duration: 4s;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+			animation-play-state: paused;
+		}
+		.wheel-of-fortune-spinning {
+			animation-play-state: running;
+		}
+		@keyframes wheel-of-fortune {
+			to {rotate: 360deg}
+		}
+	</style>
+</template>
+
+<!-- -->
+
+<div id="page" style="display: flex; justify-content: center; align-items: stretch">
+
+	<div class="tower">
+
+		<doorway-to-infinite title="Personal" href="https://github.com/arboliveira/">
+			<img class="small-img" src="GitHub-Mark.png"/>
+		</doorway-to-infinite>
+
+		<doorway-to-infinite title="Open" href="https://customaryjs.github.io/">
+			<div class="small-img" style="font-size: xx-large">&#x1F475;</div>
+		</doorway-to-infinite>
+
+	</div>
+
+	<the-arbo-group-logo style="align-self: stretch"></the-arbo-group-logo>
+
+	<div class="tower">
+
+		<doorway-to-infinite title="Professional" href="https://www.linkedin.com/in/arboliveira">
+			<img class="small-img" src="linkedin.png"/>
+		</doorway-to-infinite>
+
+		<doorway-to-infinite title="Fun" href="http://arboliveira.github.io/steamside/">
+			<img class="small-img" src="steamside.png"/>
+		</doorway-to-infinite>
+
+	</div>
+
+</div>
+
+<!-- -->
+
+<script type="importmap">{"imports": {
+	"#customary": "./_dependencies/customary/customary.mjs"
+}}</script>
+<script type="module">
+	/**
+	 * @type {CustomaryDeclaration}
+	 */
+	globalThis['customary:the-arbo-group-logo'] = {
+		config: {
+			state: ['spinning'],
+		},
+		hooks: {
+			derive: {
+				'wheel_classes': el => ({'wheel-of-fortune-spinning': el['spinning']})
+			},
+			events: {
+				'#logo-circle': el => el['spinning'] = !el['spinning']
+			}
+		}
+	};
+</script>
+<script type="module">import '#customary';</script>
+
+<!-- -->
+
+</body>
+
+</html>

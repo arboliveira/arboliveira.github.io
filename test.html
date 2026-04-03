@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>
+
+    arbo.com.br tests
+
+</title></head><body>
+
+<template data-customary-name="tests-arbo-com-br">
+    <tester-customary title="arbo.com.br"></tester-customary>
+</template>
+
+<tests-arbo-com-br></tests-arbo-com-br>
+
+<script type="importmap">
+    {
+        "imports": {
+            "chai": "./_dependencies/chai/chai.js",
+            "mocha": "./_dependencies/mocha/mocha.js",
+            "mocha.css": "./_dependencies/mocha/mocha.css",
+            "mocha-json-serialize-reporter": "./_dependencies/mocha-json-serialize-reporter/dist/mocha-json-serialize-reporter.umd.js",
+            "#customary-testing": "./_dependencies/customary-testing/index.js",
+            "#customary-testing/": "./_dependencies/customary-testing/",
+            "#customary": "./_dependencies/customary/customary.mjs"
+        }
+    }
+</script>
+
+<script type="module">
+    async function import_tests() {
+        await import('./index.html.test.js');
+    }
+
+    const mocha_css = import.meta.resolve('mocha.css');
+
+    import {TesterCustomary} from '#customary-testing/tester-customary/tester-customary.js';
+
+    /**
+     * @type {CustomaryDeclaration}
+     */
+    globalThis['customary:tests-arbo-com-br'] = {hooks: {
+        requires: [TesterCustomary],
+        lifecycle: {
+            firstUpdated: el => TesterCustomary.attach(el, mocha_css, import_tests)
+        }
+    }};
+</script>
+
+</body></html>
