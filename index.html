@@ -13,17 +13,13 @@
 
 	<title> a r b o</title>
 
-<style>
-	div#page {
-		min-height: min(66vh, 66vw);
-	}
-	.small-img {
-		height: 40px;
-	}
-	.tower {
-		display: flex; flex-direction: column; justify-content: space-between;
-	}
-</style>
+	<style>
+		@property --angle-extra {
+			syntax: '<angle>';
+			inherits: true;
+			initial-value: 0deg;  /* use to animate the orbit */
+		}
+	</style>
 
 </head>
 
@@ -165,35 +161,67 @@
 
 <!-- -->
 
-<div id="page" style="display: flex; justify-content: center; align-items: stretch">
+<template data-customary-name="galaxy-nexus">
+	<div id="page">
 
-	<div class="tower">
+		<the-arbo-group-logo></the-arbo-group-logo>
+		<customary:classMap target="div#page" classInfo="{{page_classes}}"></customary:classMap>
 
-		<doorway-to-infinite title="Personal" href="https://github.com/arboliveira/">
+		<doorway-to-infinite class="orbit" style="--i: 1" title="Personal" href="https://github.com/arboliveira/">
 			<img class="small-img" src="GitHub-Mark.png"/>
 		</doorway-to-infinite>
 
-		<doorway-to-infinite title="Open" href="https://customaryjs.github.io/">
+		<doorway-to-infinite class="orbit" style="--i: 4" title="Open" href="https://customaryjs.github.io/">
 			<div class="small-img" style="font-size: xx-large">&#x1F475;</div>
 		</doorway-to-infinite>
 
-	</div>
-
-	<the-arbo-group-logo style="align-self: stretch"></the-arbo-group-logo>
-
-	<div class="tower">
-
-		<doorway-to-infinite title="Professional" href="https://www.linkedin.com/in/arboliveira">
+		<doorway-to-infinite class="orbit" style="--i: 2" title="Professional" href="https://www.linkedin.com/in/arboliveira">
 			<img class="small-img" src="linkedin.png"/>
 		</doorway-to-infinite>
 
-		<doorway-to-infinite title="Fun" href="http://arboliveira.github.io/steamside/">
+		<doorway-to-infinite class="orbit" style="--i: 3" title="Fun" href="http://arboliveira.github.io/steamside/">
 			<img class="small-img" src="steamside.png"/>
 		</doorway-to-infinite>
 
 	</div>
+	<style>
+		div#page {
+			position: relative;
+			min-height: calc(100vh - var(--orbit-distance) + 3vw);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			--total: 4;
+			--orbit-distance: 5vw;
+			--orbit-r: calc(min(33vh, 33vw) + var(--orbit-distance));
+			margin-top: calc(var(--orbit-distance) - 4vw);
+			animation: orbit-spin 20s linear infinite reverse;
+			animation-play-state: paused;
+		}
+		.page-orbiting {
+			animation-play-state: running !important;
+		}
+		@keyframes orbit-spin {
+			to { --angle-extra: 360deg; }
+		}
+		.small-img {
+			height: 40px;
+		}
+		.orbit {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			--angle: calc(-135deg + var(--angle-extra) + var(--i) * (360deg / var(--total)));
+			transform:
+				translate(-50%, -50%)
+				rotate(var(--angle))
+				translateY(calc(-1 * var(--orbit-r)))
+				rotate(calc(-1 * var(--angle)));
+		}
+	</style>
+</template>
 
-</div>
+<galaxy-nexus></galaxy-nexus>
 
 <!-- -->
 
@@ -204,6 +232,19 @@
 	/**
 	 * @type {CustomaryDeclaration}
 	 */
+	globalThis['customary:galaxy-nexus'] = {
+		config: {
+			state: ['orbiting'],
+		},
+		hooks: {
+			derive: {
+				'page_classes': el => ({'page-orbiting': el['orbiting']})
+			},
+			events: {
+				'': el => el['orbiting'] = !el['orbiting']
+			}
+		}
+	};
 	globalThis['customary:the-arbo-group-logo'] = {
 		config: {
 			state: ['spinning'],

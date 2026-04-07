@@ -17,10 +17,12 @@ describe(suite.title, async function (){
     after(() => window.close());
 
     describe('happy day', async function () {
-        let element: HTMLElement;
+        let galaxy_el: HTMLElement;
+        let logo_el: HTMLElement;
         let logo_circle: HTMLElement;
         function assert_element() {
-            element = CT.querySelector('the-arbo-group-logo', window);
+            galaxy_el = CT.querySelector('galaxy-nexus', window);
+            logo_el = CT.querySelector('the-arbo-group-logo', galaxy_el);
         }
         function assert_spinning(spinning: boolean) {
             chai.assert.equal(
@@ -31,7 +33,7 @@ describe(suite.title, async function (){
         it('looks good', async function () {
             this.retries(64);
             assert_element();
-            logo_circle = CT.querySelector('#logo-circle', element);
+            logo_circle = CT.querySelector('#logo-circle', logo_el);
             assert_spinning(false);
         });
         it('interact', async function () {
