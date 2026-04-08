@@ -19,8 +19,13 @@
 			inherits: true;
 			initial-value: 0deg;  /* use to animate the orbit */
 		}
+		body {
+			min-height: 98vh;
+		}
 	</style>
 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <!-- -->
@@ -50,20 +55,22 @@
 			font-weight: bold;
 			font-size: 0.8em;
 		}
+		@media (max-width: 768px) {
+			.doorway {
+				font-size: 0.4em;
+			}
+		}
 	</style>
 </template>
 
 <template data-customary-name="the-arbo-group-logo">
-	<table id="logo-circle" class="wheel-of-fortune">
-		<tr>
-			<td colspan=7>
-				<table border="0" width="100%"><tr>
-					<td class="the-arbo-group-text">T</td>
-					<td class="the-arbo-group-text">H</td>
-					<td class="the-arbo-group-text">E</td>
-				</tr></table>
-			</td>
-		</tr>
+<div id="logo-circle" class="wheel-of-fortune" 
+	 style="display: flex; flex-direction: column; gap: 1em;"
+>
+	<div style="display: flex; justify-content: space-around;" class="the-arbo-group-text">
+		<span>T</span><span>H</span><span>E</span>
+	</div>
+	<table>
 		<tr>
 			<td rowspan=3 class="the-arbo-group-border">
 				<span class="the-arbo-group-logo">a</span>
@@ -95,33 +102,28 @@
 		<tr>
 			<td>&nbsp;</td>
 		</tr>
-		<tr>
-			<td colspan=7>
-				<table border="0" width="100%"><tr>
-					<td class="the-arbo-group-text">N</td>
-					<td class="the-arbo-group-text">E</td>
-					<td class="the-arbo-group-text">X</td>
-					<td class="the-arbo-group-text">U</td>
-					<td class="the-arbo-group-text">S</td>
-				</tr></table>
-			</td>
-		</tr>
 	</table>
+	<div style="display: flex; justify-content: space-around;" class="the-arbo-group-text">
+		<span>N</span><span>E</span><span>X</span><span>U</span><span>S</span>
+	</div>
+</div>
 	<customary:classMap
 			target=".wheel-of-fortune" classInfo="{{wheel_classes}}"
 	></customary:classMap>
 
 	<style>
 		#logo-circle {
-			--side: min(66vh, 66vw);
-			min-height: var(--side);
-			min-width: var(--side);
-
-			/* circle around the text */
+			min-height: 340px;
+			min-width:  340px;
+			padding: 5em; /* circle around the text */
 			border-radius: 50%; border-width: 2px; border-style: dotted; border-color: silver;
-
-			/* keep text inside circle */
-			padding-left: 80pt; padding-right: 80pt; padding-top: 50pt; padding-bottom: 50pt;
+		}
+		@media (max-width: 768px) {
+			#logo-circle {
+				min-height: 210px;
+				min-width:  210px;
+				padding: 2em;
+			}
 		}
 		#logo-circle:hover {
 			background-color: mintcream;
@@ -129,19 +131,27 @@
 		}
 		.the-arbo-group-text {
 			font-family: "Courier New", monospace;
-			font-size: 16pt;
+			font-size: 1.2em;
 			font-weight: bold;
 			text-align: center;
 		}
 		.the-arbo-group-logo {
 			font-family: "Times New Roman", serif;
-			font-size: 64pt;
+			font-size: 6em;
 			text-decoration: underline;
 		}
 		.the-arbo-group-border {
 			border: 1px solid silver;
 			padding: 4px;
 			text-align: center;
+		}
+		@media (max-width: 768px) {
+			.the-arbo-group-text {
+				font-size: 0.5em;
+			}
+			.the-arbo-group-logo {
+				font-size: 2.0em;
+			}
 		}
 		.wheel-of-fortune {
 			animation-name: wheel-of-fortune;
@@ -191,12 +201,16 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			--total: 4;
-			--orbit-distance: 5vw;
+			--satellite-slot-count: 4;
+			--orbit-distance: 4vw;
 			--orbit-r: calc(min(33vh, 33vw) + var(--orbit-distance));
-			margin-top: calc(var(--orbit-distance) - 4vw);
 			animation: orbit-spin 20s linear infinite reverse;
 			animation-play-state: paused;
+		}
+		@media (max-width: 768px) {
+			div#page {
+				--orbit-distance: 10.6vw;
+			}
 		}
 		.page-orbiting {
 			animation-play-state: running !important;
@@ -205,13 +219,18 @@
 			to { --angle-extra: 360deg; }
 		}
 		.small-img {
-			height: 40px;
+			height: 3em;
+		}
+		@media (max-width: 768px) {
+			.small-img {
+				height: 2.0em;
+			}
 		}
 		.orbit {
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			--angle: calc(-135deg + var(--angle-extra) + var(--i) * (360deg / var(--total)));
+			--angle: calc(-135deg + var(--angle-extra) + var(--i) * (360deg / var(--satellite-slot-count)));
 			transform:
 				translate(-50%, -50%)
 				rotate(var(--angle))
@@ -221,7 +240,9 @@
 	</style>
 </template>
 
-<galaxy-nexus></galaxy-nexus>
+<div style="display: flex; height: 98vh">
+<galaxy-nexus style="flex: 2"></galaxy-nexus>
+</div>
 
 <!-- -->
 

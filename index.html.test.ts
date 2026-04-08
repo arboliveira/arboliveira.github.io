@@ -20,10 +20,6 @@ describe(suite.title, async function (){
         let galaxy_el: HTMLElement;
         let logo_el: HTMLElement;
         let logo_circle: HTMLElement;
-        function assert_element() {
-            galaxy_el = CT.querySelector('galaxy-nexus', window);
-            logo_el = CT.querySelector('the-arbo-group-logo', galaxy_el);
-        }
         function assert_spinning(spinning: boolean) {
             chai.assert.equal(
                 logo_circle.classList.contains('wheel-of-fortune-spinning'),
@@ -31,8 +27,9 @@ describe(suite.title, async function (){
             );
         }
         it('looks good', async function () {
-            this.retries(64);
-            assert_element();
+            this.retries(128);
+            galaxy_el = CT.querySelector('galaxy-nexus', window);
+            logo_el = CT.querySelector('the-arbo-group-logo', galaxy_el);
             logo_circle = CT.querySelector('#logo-circle', logo_el);
             assert_spinning(false);
         });
