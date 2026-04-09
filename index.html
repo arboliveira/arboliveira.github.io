@@ -14,6 +14,27 @@
 	<title> a r b o</title>
 
 	<style>
+		/* 
+           --mobile-breakpoint: 768px
+           --foldable-breakpoint: 832px
+            
+           Note: CSS variables cannot be used in @media conditions.      
+           Search each number to find all uses of its breakpoint.
+        */
+
+		@media (max-width: 768px) {  /* --mobile-breakpoint */
+			.page-layout {
+				--within-mobile-breakpoint: true;
+			}
+		}
+		@media (max-width: 832px) {  /* --foldable-breakpoint */
+			.page-layout {
+				--within-foldable-breakpoint: true;
+			}
+		}
+	</style>
+	
+	<style>
 		@property --angle-extra {
 			syntax: '<angle>';
 			inherits: true;
@@ -42,6 +63,9 @@
 	<style>
 		div {
 			text-align: center;
+			width: 6em;
+			aspect-ratio: 1;
+			/*border: solid;*/
 		}
 		div:hover {
 			cursor: pointer;
@@ -55,56 +79,34 @@
 			font-weight: bold;
 			font-size: 0.8em;
 		}
-		@media (max-width: 768px) {
-			.doorway {
-				font-size: 0.4em;
-			}
-		}
 	</style>
 </template>
 
 <template data-customary-name="the-arbo-group-logo">
-<div id="logo-circle" class="wheel-of-fortune" 
-	 style="display: flex; flex-direction: column; gap: 1em;"
+<div id="logo-circle" class="wheel-of-fortune"
+	 style="display: flex; flex-direction: column; align-items: center; justify-content: center"
 >
-	<div style="display: flex; justify-content: space-around;" class="the-arbo-group-text">
-		<span>T</span><span>H</span><span>E</span>
-	</div>
-	<table>
-		<tr>
-			<td rowspan=3 class="the-arbo-group-border">
-				<span class="the-arbo-group-logo">a</span>
-			</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td valign=top rowspan=3 class="the-arbo-group-border">
-				<span class="the-arbo-group-logo">r</span>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td valign=top rowspan=3 class="the-arbo-group-border">
-				<span class="the-arbo-group-logo">b</span>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="the-arbo-group-border">
-				<span class="the-arbo-group-logo">o</span>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-	</table>
-	<div style="display: flex; justify-content: space-around;" class="the-arbo-group-text">
-		<span>N</span><span>E</span><span>X</span><span>U</span><span>S</span>
+	<div id="logo-rectangle" style="display: flex; flex-direction: column; gap: 2em">
+        <div style="display: flex; justify-content: space-around;" class="the-arbo-group-text">
+            <span>T</span><span>H</span><span>E</span>
+        </div>
+        <div class="arbo-logo-grid">
+            <div class="the-arbo-group-border arbo-logo-a">
+                <span class="the-arbo-group-logo">a</span>
+            </div>
+            <div class="the-arbo-group-border arbo-logo-r">
+                <span class="the-arbo-group-logo">r</span>
+            </div>
+            <div class="the-arbo-group-border arbo-logo-b">
+                <span class="the-arbo-group-logo">b</span>
+            </div>
+            <div class="the-arbo-group-border arbo-logo-o">
+                <span class="the-arbo-group-logo">o</span>
+            </div>
+        </div>
+		<div style="display: flex; justify-content: space-around;" class="the-arbo-group-text">
+			<span>N</span><span>E</span><span>X</span><span>U</span><span>S</span>
+		</div>
 	</div>
 </div>
 	<customary:classMap
@@ -113,16 +115,18 @@
 
 	<style>
 		#logo-circle {
-			min-height: 340px;
-			min-width:  340px;
+			height: 360px;
+			aspect-ratio: 1;
 			padding: 5em; /* circle around the text */
 			border-radius: 50%; border-width: 2px; border-style: dotted; border-color: silver;
 		}
-		@media (max-width: 768px) {
+		#logo-rectangle {
+			width: 340px;
+		}
+		@media (max-width: 768px) {  /* --mobile-breakpoint */
 			#logo-circle {
-				min-height: 210px;
-				min-width:  210px;
-				padding: 2em;
+				min-height: 40vh;
+				padding: 4em;
 			}
 		}
 		#logo-circle:hover {
@@ -145,13 +149,26 @@
 			padding: 4px;
 			text-align: center;
 		}
-		@media (max-width: 768px) {
-			.the-arbo-group-text {
-				font-size: 0.5em;
-			}
-			.the-arbo-group-logo {
-				font-size: 2.0em;
-			}
+		.arbo-logo-grid {
+			display: grid;
+			grid-template-columns: auto 0.6em auto 0.6em auto 0.6em auto;
+			grid-template-rows: repeat(4, auto) 1.2em;
+		}
+		.arbo-logo-a {
+			grid-column: 1;
+			grid-row: 1 / span 3;
+		}
+		.arbo-logo-r {
+			grid-column: 3;
+			grid-row: 2 / span 3;
+		}
+		.arbo-logo-b {
+			grid-column: 5;
+			grid-row: 3 / span 3;
+		}
+		.arbo-logo-o {
+			grid-column: 7;
+			grid-row: 4;
 		}
 		.wheel-of-fortune {
 			animation-name: wheel-of-fortune;
@@ -207,9 +224,16 @@
 			animation: orbit-spin 20s linear infinite reverse;
 			animation-play-state: paused;
 		}
-		@media (max-width: 768px) {
+		@media (max-width: 832px) {  /* --foldable-breakpoint */
 			div#page {
-				--orbit-distance: 10.6vw;
+				--orbit-distance: 8vw;
+			}
+		}
+		@media (max-width: 768px) {  /* --mobile-breakpoint */
+			div#page {
+				zoom: 52%;
+				--orbit-distance: 50vw;
+				margin-top: 50vh;
 			}
 		}
 		.page-orbiting {
@@ -219,12 +243,7 @@
 			to { --angle-extra: 360deg; }
 		}
 		.small-img {
-			height: 3em;
-		}
-		@media (max-width: 768px) {
-			.small-img {
-				height: 2.0em;
-			}
+			max-height: 3em;
 		}
 		.orbit {
 			position: absolute;
