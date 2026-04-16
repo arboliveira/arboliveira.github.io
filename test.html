@@ -1,19 +1,19 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>
 
-    arbo.com.br tests
+    arbo.nexus tests
 
 </title></head><body>
 
-<template data-customary-name="tests-arbo-com-br">
-    <tester-customary title="arbo.com.br"></tester-customary>
+<template data-customary-name="tests-arbo-nexus">
+    <tester-customary title="arbo.nexus"></tester-customary>
 </template>
 
-<tests-arbo-com-br></tests-arbo-com-br>
+<tests-arbo-nexus></tests-arbo-nexus>
 
 <script type="importmap">
     {
         "imports": {
-            "chai": "./_dependencies/chai/chai.js",
+            "chai": "./_dependencies/chai/index.js",
             "mocha": "./_dependencies/mocha/mocha.js",
             "mocha.css": "./_dependencies/mocha/mocha.css",
             "mocha-json-serialize-reporter": "./_dependencies/mocha-json-serialize-reporter/dist/mocha-json-serialize-reporter.umd.js",
@@ -36,7 +36,7 @@
     /**
      * @type {CustomaryDeclaration}
      */
-    globalThis['customary:tests-arbo-com-br'] = {hooks: {
+    globalThis['customary:tests-arbo-nexus'] = {hooks: {
         requires: [TesterCustomary],
         lifecycle: {
             firstUpdated: el => TesterCustomary.attach(el, mocha_css, import_tests)
